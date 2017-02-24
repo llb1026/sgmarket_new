@@ -1,0 +1,16 @@
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %>
+<%= link_to "Upload", new_post_path %>
+<%= link_to "홈으로", root_path %>
+<%= link_to "의류", clothes_path %>
+<%= link_to "화장품", cosmetic_path %>
+<%= link_to "서적", book_path %>
+<%= link_to "쿠폰/티켓", coupon_path %>
+<%= link_to "기타", etc_path %>
+
+<% @post.each do |x| %>
+    <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
+    <p><%= x.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d (%H:%M)") %></p>
+    <% if x != @post.last %>
+        <hr />
+    <% end %>
+<% end %>

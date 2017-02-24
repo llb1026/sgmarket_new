@@ -1,0 +1,42 @@
+<h2><%= @post.title %></h2>
+<p>written by <%= @post.user.email %></p>
+<!-- 이미지 사진 안보임. url을 string으로 받아오는데 이상하게 전달돼서 문제가 생긴거같음. AWS S3에는 잘 올라감 -->
+<%#= image_tag @post.image_url %>
+<p><%= @post.price %>원</p>
+<p><%= @post.detail.html_safe %></p>
+
+<% if user_signed_in? %>
+    <p>연락처: <%= @post.contact.html_safe %></p>
+    <hr/>
+    <% if @post.user.email == current_user.email %>
+      <%= link_to 'Edit', edit_post_path(@post.id) %>
+      <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <% else %>
+    <hr/>
+<% end %>
+
+
+<form action="/write_comment" method="post">
+  <label>댓글쓰기</label>
+  <input type="hidden" name="post_id" value="<%= @post.id %>">
+  <input type="hidden" name="user_id" value="<%= @post.user.id %>">
+  <input name="comment" placeholder="댓글달아줘">
+  <button type="submit">입력</button>
+</form>
+
+<ul>
+  <% @post.comments.each do |c| %>
+      <!-- user_id 전부 1로 나옴 -->
+    <li><%= c.user_id %> "<%= c.content %>"
+      <% if user_signed_in? && current_user.id == c.user_id %>
+          <a href="/delete_comment/<%=c.id%>">[x]</a>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+<hr/>
+<%= link_to "뒤로", :back %>
+<%= link_to "홈으로", root_path %>
