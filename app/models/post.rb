@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments
-  mount_uploader :image, ImageUploader
+  # mount_uploader :image, ImageUploader
 
   validates :title, :category, :price, :detail, :contact,
     presence: true

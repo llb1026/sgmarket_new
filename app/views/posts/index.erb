@@ -52,7 +52,10 @@
   <div class="reel">
     <% @posts.each do |x| %>
     <article>
-      <a class="image featured"><img src="assets/pic01.jpg" alt="" /></a>
+      
+      <!-- assets/pic01.jpg >> <#%= x.image %>로 수정-->
+      <!-- @author: JH-->
+      <a class="image featured"><img src="<%= x.image %>" alt="" /></a>
       <header>
         <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
       </header>

@@ -15,6 +15,14 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+
+    # 이미지 추가 코드
+    # @author: JH
+    uploader0 = ImageUploader.new
+    uploader0.store!(params[:post][:image])
+    @post.image = uploader0.url
+
+
     if @post.save
       redirect_to posts_path, notice: "The post has been successfully created."
     else
@@ -35,6 +43,7 @@ class PostsController < ApplicationController
     end
   end
 
+  
   def destroy
     @trash = Post.find(params[:id])
     @trash.destroy
@@ -85,7 +94,9 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :category, :title, :price, :detail, :contact, :image, :done)
+    params.require(:post).permit(:user_id, :category, :title, :price, :detail, :contact, :done) 
+    # permit 부분에서 :image 일단 뺌
+    # @author: JH
   end
 
 end
