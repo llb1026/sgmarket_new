@@ -10,7 +10,7 @@
 
 * 마이페이지에 내가 올린 게시물 (for login user only)
 
-* 카테고리별 게시물 보기 (with will_pagination)
+* 카테고리별 게시물 보기 (with will_paginate)
 
 * 게시글 상세 페이지에 댓글달기와 업로더 연락처 보기 (for login user only)
 
