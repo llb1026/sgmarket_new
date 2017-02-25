@@ -19,6 +19,11 @@ class PostsController < ApplicationController
     # 이미지 추가 코드
     # @author: JH
     uploader0 = ImageUploader.new
+    
+    # 데이터와 연결된 form_for에서는 2차원 해쉬로 data가 전송됨
+    # 즉, <%= f.file_field :image %>는 {post:{image: example.jpg}} 식으로 데이터를 보냄
+    # 따라서 form_for을 params로 받으려면 params[:post][:image] 식으로 받아야함
+    # **원래는 id말고는 params 쓰는게 아니라하니 그렇게 중요한 개념은 아닐 듯..
     uploader0.store!(params[:post][:image])
     @post.image = uploader0.url
 
@@ -95,7 +100,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :category, :title, :price, :detail, :contact, :done) 
-    # permit 부분에서 :image 일단 뺌
+    # <%= f.file_field :image %>에서 보내는 데이터를
+    # 위에 create 액션에서 params로 직접 받기 위해
+    # permit 부분에서 :image 뺌
     # @author: JH
   end
 
