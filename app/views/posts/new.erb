@@ -1,0 +1,50 @@
+<!-- Header -->
+<div id="header">
+
+  <!-- Inner -->
+  <div class="inner">
+    <header>
+      <h1>새 글 쓰기</h1>
+    </header>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li>
+        <a>Shop</a>
+        <ul>
+          <li><%= link_to "의류", clothes_path %></li>
+          <li><%= link_to "화장품", cosmetic_path %></li>
+          <li><%= link_to "서적", book_path %></li>
+          <li><%= link_to "쿠폰/티켓", coupon_path %></li>
+          <li><%= link_to "기타", etc_path %></li>
+        </ul>
+      </li>
+      <% if user_signed_in? %>
+          <li><%= link_to "Upload", new_post_path %></li>
+          <li><%= link_to "My Page", mypage_path, method: :get %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :get, data: { confirm: "잘가 또만나" } %></li>
+      <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
+
+
+<div class="wrapper style1">
+  <div class="container">
+    <%= render "form" %>
+  </div>
+</div>
+
+<!--
+1. ** aws 사진 여러개첨부(사진 보여주는 링크 경로문제) **
+2. 찜목록 (간단)
+3. done 추가기능
+4. 조금 더 css 예쁘게
+5. 게시글 삭제할 때 사용자 아이디의 비번입력하게
+6. 디플로이
+-->

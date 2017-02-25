@@ -1,0 +1,93 @@
+<!-- Header -->
+<div id="header">
+
+  <!-- Inner -->
+  <div class="inner">
+    <header>
+      <h1>상세보기</h1>
+    </header>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li>
+        <a>Shop</a>
+        <ul>
+          <li><%= link_to "의류", clothes_path %></li>
+          <li><%= link_to "화장품", cosmetic_path %></li>
+          <li><%= link_to "서적", book_path %></li>
+          <li><%= link_to "쿠폰/티켓", coupon_path %></li>
+          <li><%= link_to "기타", etc_path %></li>
+        </ul>
+      </li>
+      <% if user_signed_in? %>
+          <li><%= link_to "Upload", new_post_path %></li>
+          <li><%= link_to "My Page", mypage_path, method: :get %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
+      <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
+
+<!-- Main -->
+<div class="wrapper style1">
+
+  <div class="container">
+    <article id="main" class="special">
+      <header>
+        <h2><%= @post.title %></h2>
+        <p>#<%= @post.category %> | <%= @post.price %>원</p>
+      </header>
+  
+      <!-- @post.image_url >> @post.image로 수정-->
+      <!-- @author: JH-->
+      <%#= image_tag @post.image, class: "image featured" %>
+      
+      <p><%= @post.detail.html_safe %></p>
+    </article>
+    <% if user_signed_in? %>
+        <p>연락처: <%= @post.contact.html_safe %></p>
+        <hr/>
+        <form action="/write_comment" method="post">
+          <label>댓글쓰기</label>
+          <input type="hidden" name="post_id" value="<%= @post.id %>">
+          <input type="hidden" name="user_id" value="<%= @post.user.id %>">
+          <textarea name="comment" placeholder="댓글달아줘" rows="1" cols="40"></textarea>
+          <button type="submit" style="margin-top: 1em">입력</button>
+        </form>
+    <% end %>
+
+    <% unless @post.comments.empty? %>
+      <section style="padding-top: 2em">
+        <ul class="divided">
+          <% @post.comments.each do |c| %>
+          <li>
+            <article class="post stub">
+              <li><p><%= c.user.email %> "<%= c.content %>"
+                <% if user_signed_in? && current_user.id == c.user_id %>
+                    <a href="/delete_comment/<%=c.id%>">[x]</a>
+                <% end %></p>
+              </li>
+            </article>
+          </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+
+
+
+    <hr/>
+    <%= link_to "뒤로", :back, class: 'button', style: 'padding: 0 auto; margin: 0.5em auto;' %>
+    <%= link_to "홈으로", root_path, class: 'button', style: 'padding: 0 auto; margin: 0.5em auto;' %>
+    <% if user_signed_in? && @post.user.email == current_user.email %>
+        <%= link_to "수정하기", edit_post_path(@post.id), class: 'button', style: 'padding: 0 auto; margin: 0.5em auto;' %>
+  
+        <%= link_to "삭제하기", @post, method: :delete, data: { confirm: "진짜 삭제할까요?" }, class: 'button', style: 'padding: 0 auto; margin: 0.5em auto;' %>
+    <% end %>
+  </div>
+</div>
