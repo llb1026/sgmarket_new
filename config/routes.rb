@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/coupon' => 'posts#coupon'
   get '/etc' => 'posts#etc'
   get '/mypage' => 'posts#mypage'
+  get '/notice' => 'posts#notice'
   post '/write_comment' => 'posts#write_comment'
   get 'delete_comment/:comment_id' => 'posts#delete_comment'
 

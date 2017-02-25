@@ -18,35 +18,33 @@
     </div>
     <br />
 
-    <div>
-      <%= f.label :price %>
-    </div>
-    <div>
-      <%= f.text_field :price, placeholder: '숫자만 부탁해' %>
-    </div>
-    <br />
+    <div class="row">
+      <section class="4u 12u(mobile)">
+        <div>
+          <%= f.label :price %>
+        </div>
+        <div>
+          <%= f.text_field :price, placeholder: '숫자만 부탁해' %>
+        </div>
+      </section>
 
-    <div>
-      <%= f.label :category %>
-    </div>
-    <div>
-      <%= f.select(:category, [['의류', '의류'], ['화장품', '화장품'], ['서적', '서적'], ['쿠폰/티켓', '쿠폰/티켓'], ['기타', '기타']]) %>
-    </div>
-    <br />
+      <section class="4u 12u(mobile)">
+        <div>
+          <%= f.label :category %>
+        </div>
+        <div>
+          <%= f.select(:category, [['의류', '의류'], ['화장품', '화장품'], ['서적', '서적'], ['쿠폰/티켓', '쿠폰/티켓'], ['기타', '기타']]) %>
+        </div>
+      </section>
 
-    <div>
-      <%= f.label :contact %>
-    </div>
-    <div>
-      <%= f.text_field :contact, placeholder: '보안생각해서 입력해줘' %>
-    </div>
-    <br />
-
-    <div>
-      <%= f.label :image %>
-    </div>
-    <div>
-      <%= f.file_field :image %>
+      <section class="4u 12u(mobile)">
+        <div>
+          <%= f.label :contact %>
+        </div>
+        <div>
+          <%= f.text_field :contact, placeholder: '보안생각해서 입력해줘' %>
+        </div>
+      </section>
     </div>
     <br />
 
@@ -57,6 +55,14 @@
       <%= f.cktext_area :detail, rows: 10 %>
     </div>
     <br />
+
+    <div>
+      <%= f.label :image %>
+    </div>
+    <div>
+      <%= f.file_field :image %>
+    </div>
+    <br/>
 
     <div>
       <%= f.submit '글쓰기!', data: { confirm: '정말 글 써요?', disable_with: '처리 중...'} %>

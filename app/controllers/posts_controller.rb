@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.order("created_at DESC").limit(5).offset(0)
+    @posts = Post.order("created_at DESC").limit(10).offset(0)
   end
 
   def show
@@ -30,7 +30,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       redirect_to session[:return_to], notice: "The post has been successfully updated."
-      #redirect_to posts_path, notice: "The post has been successfully updated."
     else
       render action: "edit"
     end
@@ -43,27 +42,27 @@ class PostsController < ApplicationController
   end
 
   def clothes
-    @posts = Post.where(:category => '의류').paginate(page: params[:page], per_page: 5).order('id desc')
+    @posts = Post.where(:category => '의류').paginate(page: params[:page], per_page: 12).order('id desc')
   end
 
   def cosmetic
-    @posts = Post.where(:category => '화장품').paginate(page: params[:page], per_page: 5).order('id desc')
+    @posts = Post.where(:category => '화장품').paginate(page: params[:page], per_page: 12).order('id desc')
   end
 
   def book
-    @posts = Post.where(:category => '서적').paginate(page: params[:page], per_page: 5).order('id desc')
+    @posts = Post.where(:category => '서적').paginate(page: params[:page], per_page: 12).order('id desc')
   end
 
   def coupon
-    @posts = Post.where(:category => '쿠폰/티켓').paginate(page: params[:page], per_page: 5).order('id desc')
+    @posts = Post.where(:category => '쿠폰/티켓').paginate(page: params[:page], per_page: 12).order('id desc')
   end
 
   def etc
-    @posts = Post.where(:category => '기타').paginate(page: params[:page], per_page: 5).order('id desc')
+    @posts = Post.where(:category => '기타').paginate(page: params[:page], per_page: 12).order('id desc')
   end
 
   def mypage
-    @post = Post.where(:user => current_user.id).paginate(page: params[:page], per_page: 5).order('id desc')
+    @post = Post.where(:user => current_user.id).paginate(page: params[:page], per_page: 10).order('id desc')
   end
 
   def write_comment

@@ -13,3 +13,12 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += Ckeditor.assets
 Rails.application.config.assets.precompile += %w( ckeditor/* )
 Rails.application.config.autoload_paths += %W(sgmarket_jy/app/models/ckeditor)
+
+Rails.application.config.assets.precompile += %w( main.css )
+Rails.application.config.assets.precompile += %w( jquery.min.js )
+Rails.application.config.assets.precompile += %w( jquery.dropotron.min.js )
+Rails.application.config.assets.precompile += %w( jquery.scrolly.min.js )
+Rails.application.config.assets.precompile += %w( jquery.onvisible.min.js )
+Rails.application.config.assets.precompile += %w( skel.min.js )
+Rails.application.config.assets.precompile += %w( util.js )
+Rails.application.config.assets.precompile += %w( main.js )

@@ -1,21 +1,51 @@
-<% if user_signed_in? %>
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %>
-    <%= link_to "Upload", new_post_path %>
-    <%= link_to "My Page", mypage_path, method: :get %>
-<% else %>
-    <%= link_to "Log In", new_user_session_path %>
-<% end %>
-<%= link_to "의류", clothes_path %>
-<%= link_to "화장품", cosmetic_path %>
-<%= link_to "서적", book_path %>
-<%= link_to "쿠폰/티켓", coupon_path %>
-<%= link_to "기타", etc_path %>
-<%= link_to "홈으로", root_path %>
-<% @posts.each do |x| %>
-    <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
-    <p><%= truncate(x.detail.html_safe, length: 30) %></p>
-    <% if x != @posts.last %>
-        <hr />
-    <% end %>
-<% end %>
-<%= will_paginate @posts, :class => 'apple_pagination' %>
+<!-- Header -->
+<div id="header">
+
+  <!-- Inner -->
+  <div class="inner">
+    <header>
+      <h1>#쿠폰/티켓</h1>
+    </header>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li>
+        <a>Shop</a>
+        <ul>
+          <li><%= link_to "의류", clothes_path %></li>
+          <li><%= link_to "화장품", cosmetic_path %></li>
+          <li><%= link_to "서적", book_path %></li>
+          <li><%= link_to "쿠폰/티켓", coupon_path %></li>
+          <li><%= link_to "기타", etc_path %></li>
+        </ul>
+      </li>
+      <% if user_signed_in? %>
+          <li><%= link_to "Upload", new_post_path %></li>
+          <li><%= link_to "My Page", mypage_path, method: :get %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
+      <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
+
+<div class="wrapper style1">
+  <div class="container">
+    <div class="row">
+      <% @posts.each do |x| %>
+          <article class="4u 12u(mobile) special">
+            <%= image_tag "pic07.jpg", class: "image featured" %>
+            <header>
+              <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
+              <h5><%= x.price %>원</h5>
+            </header>
+          </article>
+      <% end %>
+    </div>
+    <%= will_paginate @posts, :class => 'apple_pagination' %>
+  </div>
+</div>

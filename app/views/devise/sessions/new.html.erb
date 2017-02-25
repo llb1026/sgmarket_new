@@ -1,26 +1,63 @@
-<h2>Log in</h2>
+<!-- Header -->
+<div id="header">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <!-- Inner -->
+  <div class="inner">
+    <header>
+      <h1>로그인</h1>
+    </header>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li>
+        <a>Shop</a>
+        <ul>
+          <li><%= link_to "의류", clothes_path %></li>
+          <li><%= link_to "화장품", cosmetic_path %></li>
+          <li><%= link_to "서적", book_path %></li>
+          <li><%= link_to "쿠폰/티켓", coupon_path %></li>
+          <li><%= link_to "기타", etc_path %></li>
+        </ul>
+      </li>
+      <% if user_signed_in? %>
+          <li><%= link_to "Upload", new_post_path %></li>
+          <li><%= link_to "My Page", mypage_path, method: :get %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
+      <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>
+
+<div class="wrapper style1">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

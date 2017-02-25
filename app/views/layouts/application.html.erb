@@ -2,12 +2,51 @@
 <html>
   <head>
     <title>SG Market Test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'main', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery.dropotron.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery.scrolly.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery.onvisible.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'skel.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'util', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="page-wrapper">
+
+      <%= yield %>
+
+      <div id="footer">
+        <div class="container">
+          <div class="row">
+            <div class="12u">
+              <!-- Copyright -->
+              <div class="copyright">
+                <ul class="icons">
+                  <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                  <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                  <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                  <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                  <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                  <li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+                </ul>
+                <ul class="menu">
+                  <li>&copy; SG Market. All rights reserved.</li>
+                  <li>LIKELION@Sogang Univ.</li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
