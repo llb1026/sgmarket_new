@@ -14,17 +14,17 @@
 
 * 게시글 상세 페이지에 댓글달기와 업로더 연락처 보기 (for login user only)
 
-#### 추후 버전에서 추가해야 할 기능은 다음과 같습니다.
-
 * 판매완료된 물건 done 처리 (for author only)
+
+* 마이페이지에 내가 찜한 게시물 (for login user only)
+
+#### 추후 버전에서 추가해야 할 기능은 다음과 같습니다.
 
 * 공지 게시판용 카테고리 (for admin user only)
 
 * 게시글 제목으로 검색 기능 (extract data from db)
 
 * 댓글달때 페이지 새로고침 없애기 (js)
-
-* 마이페이지에 내가 찜한 게시물 (for login user only)
 
 #### 이에 더해 고쳐가야 할 사항은 다음과 같습니다.
 

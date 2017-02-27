@@ -57,7 +57,7 @@
     <br />
 
     <div>
-      <%= f.label :image %>
+      <%= f.label :image, "Title Image" %>
     </div>
     <div>
       <%= f.file_field :image %>
@@ -65,6 +65,6 @@
     <br/>
 
     <div>
-      <%= f.submit '글쓰기!', data: { confirm: '정말 글 써요?', disable_with: '처리 중...'} %>
+      <%= f.submit '글쓰기!', data: { confirm: '정말로 쓸까?', disable_with: '처리 중...'} %>
     </div>
 <% end %>

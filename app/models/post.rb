@@ -2,6 +2,10 @@ class Post < ApplicationRecord
   acts_as_votable
   belongs_to :user
   has_many :comments
+  searchable do
+    text :title, :default_boost => 2
+    text :detail
+  end
   # mount_uploader :image, ImageUploader
   # has_attached_file :image
 

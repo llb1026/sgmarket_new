@@ -26,7 +26,10 @@ gem 'fog'                 # image upload via form tag
 gem 'paperclip'           # image upload via ckeditor
 gem 'mini_magick'         # image upload via ckeditor
 
-gem 'acts_as_votable', '~> 0.10.0'     # for mypage Jjim list
+gem 'acts_as_votable'     # for mypage Jjim list
+gem 'sunspot_rails'       # for search system
+gem 'sunspot_solr'        # for search system
+gem 'progress_bar'        # for search system
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

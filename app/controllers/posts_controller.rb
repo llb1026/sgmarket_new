@@ -113,6 +113,19 @@ class PostsController < ApplicationController
     redirect_to :back
   end
 
+  # 판매완료 수정중
+  def done
+    @done = Post.find(params[:id])
+    @done.update_attributes(done: true)
+    redirect_to root_path
+  end
+
+  def search
+    @search = Post.search(:include => [:comments]) do
+      keywords(params[:q])
+    end
+  end
+
   private
 
   def post_params

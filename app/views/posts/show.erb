@@ -90,26 +90,29 @@
                       <% @post.comments.each do |c| %>
                           <li>
                             <article class="post stub">
-                          <li><p><%= c.user.email %> "<%= c.content %>"
-                            <% if user_signed_in? && current_user.id == c.user_id %>
-                                <a href="/delete_comment/<%=c.id%>">[x]</a>
-                            <% end %></p>
+                              <li><p><%= c.user.email %> "<%= c.content %>"
+                                <% if user_signed_in? && current_user.id == c.user_id %>
+                                    <a href="/delete_comment/<%=c.id%>">[x]</a>
+                                <% end %></p>
+                              </li>
+                            </article>
                           </li>
-                      </article>
-                      </li>
-                  <% end %>
-                  </>
+                      <% end %>
+                    </ul>
                   </section>
               <% end %>
             </section>
-            </article>
+              </article>
       <% end %>
       <hr/>
       <ul class="actions">
         <li><%= link_to "뒤로", :back, class: 'button special icon fa-chevron-left' %></li>
         <% if user_signed_in? && @post.user.email == current_user.email %>
             <li><%= link_to "수정하기", edit_post_path(@post.id), class: 'button icon fa-pencil-square-o' %></li>
-            <li><%= link_to "삭제하기", @post, method: :delete, data: { confirm: "진짜 삭제할까요?" }, class: 'button icon fa-trash-o' %></li>
+            <li><%= link_to "삭제하기", @post, method: :delete, data: { confirm: "진짜 삭제할까?" }, class: 'button icon fa-trash-o' %></li>
+            <% if @post.done==false %>
+              <li><%= link_to "판매완료", done_post_path(@post), method: :put, data: { confirm: "판매완료할까?" }, class: 'button icon fa-check' %></li>
+            <% end %>
         <% end %>
       </ul>
     </div>

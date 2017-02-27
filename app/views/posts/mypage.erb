@@ -46,6 +46,7 @@
               <th>Title</th>
               <th>Date</th>
               <th>Like</th>
+              <th>Done</th>
             </tr>
             </thead>
             <tbody>
@@ -55,6 +56,13 @@
                       <td><%= link_to x.title.html_safe, post_path(x.id), method: :get %>(<%= x.comments.count %>)</td>
                       <td><%= x.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d") %></td>
                       <td><%= x.votes_for.size %></td>
+                      <td>
+                        <% if x.done? %>
+                            <%= "판매완료" %>
+                        <% else %>
+                            <%= "판매중" %>
+                        <% end %>
+                      </td>
                     </tr>
                 <% end %>
             <% end %>

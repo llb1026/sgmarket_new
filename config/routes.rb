@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  resources :posts
+  resources :posts do
+    member do
+      put :done
+    end
+  end
   resources :images
   resources :links do
     member do
@@ -8,6 +12,7 @@ Rails.application.routes.draw do
       put "dislike", to: "posts#downvote"
     end
   end
+
   devise_for :users
 
   root 'posts#index'
@@ -20,6 +25,7 @@ Rails.application.routes.draw do
   get '/notice' => 'posts#notice'
   post '/write_comment' => 'posts#write_comment'
   get 'delete_comment/:comment_id' => 'posts#delete_comment'
+  put '/done' => 'posts#done'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
