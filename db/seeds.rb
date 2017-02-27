@@ -8,7 +8,7 @@
 
 Post.destroy_all
 
-50.times do
+30.times do
   Post.create!(
       {
           user_id: User.all.ids.sample,

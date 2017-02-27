@@ -25,7 +25,7 @@
       <% if user_signed_in? %>
           <li><%= link_to "Upload", new_post_path %></li>
           <li><%= link_to "My Page", mypage_path, method: :get %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
       <% else %>
           <li><%= link_to "Log In", new_user_session_path %></li>
       <% end %>

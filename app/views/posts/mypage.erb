@@ -25,7 +25,7 @@
       <% if user_signed_in? %>
           <li><%= link_to "Upload", new_post_path %></li>
           <li><%= link_to "My Page", mypage_path, method: :get %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { confirm: "잘가 또만나" } %></li>
       <% else %>
           <li><%= link_to "Log In", new_user_session_path %></li>
       <% end %>
@@ -43,7 +43,6 @@
           <table>
             <thead>
             <tr>
-              <th>No.</th>
               <th>Title</th>
               <th>Date</th>
               <th>Like</th>
@@ -53,7 +52,6 @@
             <% @post.each do |x| %>
                 <% if x.user_id == current_user.id %>
                     <tr>
-                      <td><%= x.id %></td>
                       <td><%= link_to x.title.html_safe, post_path(x.id), method: :get %>(<%= x.comments.count %>)</td>
                       <td><%= x.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d") %></td>
                       <td><%= x.votes_for.size %></td>
@@ -72,7 +70,6 @@
           <table>
             <thead>
             <tr>
-              <th>No.</th>
               <th>Title</th>
               <th>Date</th>
               <th>Done</th>
@@ -83,7 +80,6 @@
               <% y.votes_for.up.by_type(User).voters.each do |z| %>
                 <% if z == @user %>
                   <tr>
-                    <td><%= y.id %></td>
                     <td><%= link_to y.title.html_safe, post_path(y.id), method: :get %></td>
                     <td><%= y.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d") %></td>
                     <td>
