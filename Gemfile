@@ -13,7 +13,11 @@ gem 'ckeditor'            # text editor
 gem 'devise'              # login
 gem 'authority'           # check authority
 gem 'omniauth-facebook'   # for facebook login
-gem 'will_paginate'       # for pagination
+
+# will_paginate was eliminated since it stops js after clicking next pages. (URL change issue)
+# 차라리 네이버쇼핑 상품목록창처럼 페이지네이션 안 하고 쭉 아래로 스크롤 내리는 게 사용자에게 더 편할수도 있음
+# 대신 데스크탑/모바일 상단에 항상 네비게이션 바가 위치함
+#gem 'will_paginate'       # for pagination
 
 gem 'net-ssh'             # image upload via form tag
 gem 'carrierwave'         # image upload via form tag
@@ -21,6 +25,8 @@ gem 'fog'                 # image upload via form tag
 
 gem 'paperclip'           # image upload via ckeditor
 gem 'mini_magick'         # image upload via ckeditor
+
+gem 'acts_as_votable', '~> 0.10.0'     # for mypage Jjim list
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

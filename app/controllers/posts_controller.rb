@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = current_user
     session[:return_to] = request.fullpath
   end
 
@@ -58,27 +59,29 @@ class PostsController < ApplicationController
   end
 
   def clothes
-    @posts = Post.where(:category => '의류').paginate(page: params[:page], per_page: 9).order('id desc')
+    @posts = Post.where(:category => '의류')#.paginate(page: params[:page], per_page: 9).order('id desc')
   end
 
   def cosmetic
-    @posts = Post.where(:category => '화장품').paginate(page: params[:page], per_page: 9).order('id desc')
+    @posts = Post.where(:category => '화장품')#.paginate(page: params[:page], per_page: 9).order('id desc')
   end
 
   def book
-    @posts = Post.where(:category => '서적').paginate(page: params[:page], per_page: 9).order('id desc')
+    @posts = Post.where(:category => '서적')#.paginate(page: params[:page], per_page: 9).order('id desc')
   end
 
   def coupon
-    @posts = Post.where(:category => '쿠폰/티켓').paginate(page: params[:page], per_page: 9).order('id desc')
+    @posts = Post.where(:category => '쿠폰/티켓')#.paginate(page: params[:page], per_page: 9).order('id desc')
   end
 
   def etc
-    @posts = Post.where(:category => '기타').paginate(page: params[:page], per_page: 9).order('id desc')
+    @posts = Post.where(:category => '기타')#.paginate(page: params[:page], per_page: 9).order('id desc')
   end
 
   def mypage
-    @post = Post.where(:user => current_user.id).paginate(page: params[:page], per_page: 10).order('id desc')
+    @post = Post.where(:user => current_user.id)
+    @posts = Post.order("created_at DESC")
+    @user = current_user
   end
 
   def write_comment
@@ -95,6 +98,18 @@ class PostsController < ApplicationController
     delc = Comment.find(params[:comment_id])
     delc.delete
 
+    redirect_to :back
+  end
+
+  def upvote
+    @link = Post.find(params[:id])
+    @link.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @link = Post.find(params[:id])
+    @link.downvote_by current_user
     redirect_to :back
   end
 

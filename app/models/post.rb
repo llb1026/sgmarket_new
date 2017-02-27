@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  acts_as_votable
   belongs_to :user
   has_many :comments
   # mount_uploader :image, ImageUploader
@@ -11,5 +12,5 @@ class Post < ApplicationRecord
     inclusion: { in: ['의류', '화장품', '서적', '쿠폰/티켓', '기타'] }
 
   validates :price,
-    numericality: { only_integer: true }
+    numericality: { only_decimal: true }
 end

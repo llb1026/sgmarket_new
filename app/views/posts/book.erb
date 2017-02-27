@@ -42,11 +42,12 @@
             <%#= image_tag "pic07.jpg", class: "image featured" %>
             <header>
               <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
-              <h5><%= x.price %>원</h5>
+              <h4><%= x.price %>원</h4>
+              <h6><%= x.votes_for.size %> 찜 | <%= x.comments.count %> 개 댓글</h6>
             </header>
           </article>
       <% end %>
     </div>
-    <%= will_paginate @posts, :class => 'apple_pagination' %>
+    <%#= will_paginate @posts, :class => 'apple_pagination' %>
   </div>
 </div>

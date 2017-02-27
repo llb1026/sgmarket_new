@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :posts
   resources :images
+  resources :links do
+    member do
+      put "like", to: "posts#upvote"
+      put "dislike", to: "posts#downvote"
+    end
+  end
   devise_for :users
 
   root 'posts#index'

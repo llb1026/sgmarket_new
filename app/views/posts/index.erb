@@ -60,7 +60,7 @@
         <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
       </header>
       <p>#<%= x.category %></p>
-      <p><%= truncate(x.detail.html_safe, length: 25) %></p>
+      <p><%= truncate(x.detail.html_safe, length: 20) %></p>
     </article>
     <% end %>
   </div>

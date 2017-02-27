@@ -46,6 +46,7 @@
               <th>No.</th>
               <th>Title</th>
               <th>Date</th>
+              <th>Like</th>
             </tr>
             </thead>
             <tbody>
@@ -53,8 +54,9 @@
                 <% if x.user_id == current_user.id %>
                     <tr>
                       <td><%= x.id %></td>
-                      <td><%= link_to x.title.html_safe, post_path(x.id), method: :get %></td>
-                      <td><%= x.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d (%H:%M)") %></td>
+                      <td><%= link_to x.title.html_safe, post_path(x.id), method: :get %>(<%= x.comments.count %>)</td>
+                      <td><%= x.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d") %></td>
+                      <td><%= x.votes_for.size %></td>
                     </tr>
                 <% end %>
             <% end %>
@@ -62,7 +64,6 @@
           </table>
         </div>
       </article>
-      <%= will_paginate @post, :class => 'apple_pagination' %>
     </section>
     <section class="6u 12u(mobile)">
       <article id="main" class="special">
@@ -74,14 +75,28 @@
               <th>No.</th>
               <th>Title</th>
               <th>Date</th>
+              <th>Done</th>
             </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+            <% @posts.each do |y| %>
+              <% y.votes_for.up.by_type(User).voters.each do |z| %>
+                <% if z == @user %>
+                  <tr>
+                    <td><%= y.id %></td>
+                    <td><%= link_to y.title.html_safe, post_path(y.id), method: :get %></td>
+                    <td><%= y.created_at.in_time_zone("Asia/Seoul").strftime("%Y.%m.%d") %></td>
+                    <td>
+                      <% if y.done? %>
+                        <%= "판매완료" %>
+                      <% else %>
+                        <%= "판매중" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
             </tbody>
           </table>
         </div>
