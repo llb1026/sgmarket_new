@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     end
   end
 
-  
+
   def destroy
     @trash = Post.find(params[:id])
     @trash.destroy
@@ -90,8 +90,6 @@ class PostsController < ApplicationController
     cmt.post_id = params[:post_id]
     cmt.user_id = params[:user_id]
     cmt.save
-
-    redirect_to :back
   end
 
   def delete_comment
@@ -129,7 +127,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :category, :title, :price, :detail, :contact, :done) 
+    params.require(:post).permit(:user_id, :category, :title, :price, :detail, :contact, :done)
     # permit 부분에서 :image 일단 뺌
     # @author: JH
   end

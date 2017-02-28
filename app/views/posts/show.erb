@@ -76,31 +76,71 @@
               </header>
             </section>
             <section>
-              <form action="/write_comment" method="post">
-                <input type="hidden" name="post_id" value="<%= @post.id %>">
-                <input type="hidden" name="user_id" value="<%= @post.user.id %>">
-                <textarea name="comment" placeholder="댓글달아줘" rows="1" cols="40"></textarea>
+              <!-- <form action="/write_comment" method="post"> -->
+                <input id="postId" type="hidden" name="post_id" value="<%= @post.id %>">
+
+                <!-- 댓글쓸사람의 user id를 가져와야함! (*@post.user.id는 게시글의 user id!) -->
+                <!-- @author JH -->
+                <input id="userId" type="hidden" name="user_id" value="<%= current_user.id %>">
+                <textarea id="comment" name="comment" placeholder="댓글달아줘" rows="1" cols="40"></textarea>
                 <ul class="actions">
-                  <li><input type="submit" value="입력" class="special" /></li>
+                  <li><input type="submit" value="입력" class="special" id="commentBtn" /></li>
                 </ul>
-              </form>
-              <% unless @post.comments.empty? %>
+              <!-- </form> -->
+
+
+<!-- 댓글Ajax로 다는 부분 -->
+<!-- 미해결부분 -->
+<!-- 1. assets로 옮기면 루비코드를 사용 못함 -->
+<!-- 2. 댓글 삭제 버튼을 못 넣음 (루비코드를 못써서 해당 comment의 id를 가져올 수가 없음) -->
+<!-- 그래도 작동은 됨 -->
+<!-- @author: JH -->
+<script>
+$("#commentBtn").click(function() {
+  comment = $('textarea#comment').val();
+  postId = $('input#postId').val();
+  userId = $('input#userId').val();
+    $.ajax({
+      method: "POST",
+      url: "/write_comment",
+      data: {comment: comment, post_id: postId, user_id: userId},
+      success: function(){
+        // swal(
+        //   '작성 완료!',
+        //   '댓글이 삭제되었습니다.',
+        //   'success'
+        // )
+        // comment 삭제 기능을 어케 넣을지 모르겠음
+        $('.divided').append('<li><article class="post stub addedCmt"><li><p><%= current_user.email %>"' + comment + '"</p></li></article></li>');
+        $('textarea#comment').val('');
+        $("html, body").animate({ scrollTop: $('.addedCmt').offset().top }, 1000);
+      },
+      error: function(){
+        alert("리플이 작성되지 않았습니다.");
+      }
+    })
+});
+</script>
                   <section style="padding-top: 2em">
                     <ul class="divided">
-                      <% @post.comments.each do |c| %>
-                          <li>
-                            <article class="post stub">
-                              <li><p><%= c.user.email %> "<%= c.content %>"
-                                <% if user_signed_in? && current_user.id == c.user_id %>
-                                    <a href="/delete_comment/<%=c.id%>">[x]</a>
-                                <% end %></p>
-                              </li>
-                            </article>
-                          </li>
+                      <!-- 원래 unless가 section 위쪽에 있었는데 ajax로 바로 생성하려면 -->
+                      <!-- section > ul > li 까지 존재해야해서 아래로 옮김 -->
+                      <!-- @author: JH -->
+                      <% unless @post.comments.empty? %>
+                        <% @post.comments.each do |c| %>
+                            <li>
+                              <article class="post stub">
+                                <li><p><%= c.user.email %> "<%= c.content %>"
+                                  <% if user_signed_in? && current_user.id == c.user_id %>
+                                      <a href="/delete_comment/<%=c.id%>">[x]</a>
+                                  <% end %></p>
+                                </li>
+                              </article>
+                            </li>
+                        <% end %>
                       <% end %>
                     </ul>
                   </section>
-              <% end %>
             </section>
               </article>
       <% end %>
