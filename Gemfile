@@ -27,9 +27,12 @@ gem 'paperclip'           # image upload via ckeditor
 gem 'mini_magick'         # image upload via ckeditor
 
 gem 'acts_as_votable'     # for mypage Jjim list
-gem 'sunspot_rails'       # for search system
-gem 'sunspot_solr'        # for search system
-gem 'progress_bar'        # for search system
+
+#gem 'sunspot_rails'       # for search system
+#gem 'sunspot_solr'        # for search system
+#gem 'progress_bar'        # for search system
+
+gem 'figaro'              # for deploy
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

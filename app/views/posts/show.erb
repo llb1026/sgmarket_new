@@ -90,7 +90,7 @@
                       <% @post.comments.each do |c| %>
                           <li>
                             <article class="post stub">
-                              <li><p><%= c.user.email %> "<%= c.content %>"
+                              <li><p><%= c.user.email %>: <%= c.content %>
                                 <% if user_signed_in? && current_user.id == c.user_id %>
                                     <a href="/delete_comment/<%=c.id%>">[x]</a>
                                 <% end %></p>
