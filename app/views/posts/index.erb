@@ -42,7 +42,7 @@
 <!-- Banner -->
 <section id="banner">
   <header>
-    <h2>안녕! 새로 올라온 물건들이 많아!</h2>
+    <h2>안녕! 새로 올라온 물건이 많아!</h2>
     <p>개강시즌 고생이 많은 너를 위해 준비했어</p>
   </header>
 </section>
@@ -60,7 +60,7 @@
         <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
       </header>
       <p>#<%= x.category %></p>
-      <p><%= truncate(x.detail.html_safe, length: 20) %></p>
+      <%= truncate(x.detail.html_safe, length: 20) %>
     </article>
     <% end %>
   </div>

@@ -61,8 +61,8 @@
 	.container {
 		margin-left: auto;
 		margin-right: auto;
-        padding-left: 3em;
-        padding-right: 3em;
+        /*padding-left: 3em;*/
+        /*padding-right: 3em;*/
 	}
 
 	.container.\31 25\25 {
@@ -3333,3 +3333,11 @@ table.alt tfoot {
 					}
 
 	}
+
+
+
+/* 에디터 이미지 사이즈 조정 */
+#editor_zone > p > img {
+	max-width: 100% !important;
+	height: auto !important;
+}
