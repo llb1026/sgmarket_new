@@ -37,6 +37,7 @@
   <div class="container">
     <div class="row">
       <% @posts.each do |x| %>
+	<% unless x.done? %>
           <article class="4u 12u(mobile) special">
             <img src="<%= x.image %>" alt="" height="250" width="300" class="image featured"/>
             <%#= image_tag "pic07.jpg", class: "image featured" %>
@@ -46,6 +47,7 @@
               <span><%= x.votes_for.size %> 찜 | <%= x.comments.count %> 개 댓글</span>
             </header>
           </article>
+	<% end %>
       <% end %>
     </div>
     <%#= will_paginate @posts, :class => 'apple_pagination' %>

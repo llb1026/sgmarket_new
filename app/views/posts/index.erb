@@ -51,17 +51,18 @@
 <section class="carousel">
   <div class="reel">
     <% @posts.each do |x| %>
-    <article>
+	<% unless x.done? %>
+    	<article>
 
-      <!-- assets/pic01.jpg >> <#%= x.image %>로 수정-->
-      <!-- @author: JH-->
-      <a class="image featured"><img src="<%= x.image %>" alt="" height="250" width="300"/></a>
-      <header>
-        <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
-      </header>
-      <p>#<%= x.category %></p>
-      <%= truncate(x.detail.html_safe, length: 20) %>
-    </article>
+      	<!-- assets/pic01.jpg >> <#%= x.image %>로 수정-->
+      	<!-- @author: JH-->
+      	<a class="image featured"><img src="<%= x.image %>" alt="" height="250" width="300"/></a>
+      	<header>
+        	<h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
+      	</header>
+      	<p>#<%= x.category %> | <%= x.price %>원</p>
+    	</article>
+	<% end %>
     <% end %>
   </div>
 </section>

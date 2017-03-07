@@ -103,10 +103,11 @@
               <% end %>
             </section>
               </article>
+	<% else %>
+	<p> * 로그인하면 연락처도 알 수 있고 댓글도 달 수 있어! * <p>
       <% end %>
       <hr/>
       <ul class="actions">
-        <li><%= link_to "뒤로", :back, class: 'button special icon fa-chevron-left' %></li>
         <% if user_signed_in? && @post.user.email == current_user.email %>
             <li><%= link_to "수정하기", edit_post_path(@post.id), class: 'button icon fa-pencil-square-o' %></li>
             <li><%= link_to "삭제하기", @post, method: :delete, data: { confirm: "진짜 삭제할까?" }, class: 'button icon fa-trash-o' %></li>
