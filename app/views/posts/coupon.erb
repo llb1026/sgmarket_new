@@ -37,17 +37,19 @@
   <div class="container">
     <div class="row">
       <% @posts.each do |x| %>
-	<% unless x.done? %>
           <article class="4u 12u(mobile) special">
-            <img src="<%= x.image %>" alt="" height="250" width="300" class="image featured"/>
+           <% if x.done? %>
+            <img src="" alt="" height="250" width="300" class="image featured"/>
+           <% else %>
+	    <img src="<%= x.image %>" alt="" height="250" width="300" class="image featured"/>
             <%#= image_tag "pic07.jpg", class: "image featured" %>
-            <header>
+           <% end %>
+	    <header>
               <h3><%= link_to x.title.html_safe, post_path(x.id), method: :get %></h3>
               <span><b><%= x.price %>원</b></span><br>
               <span><%= x.votes_for.size %> 찜 | <%= x.comments.count %> 개 댓글</span>
             </header>
           </article>
-	<% end %>
       <% end %>
     </div>
     <%#= will_paginate @posts, :class => 'apple_pagination' %>

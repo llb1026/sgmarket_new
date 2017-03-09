@@ -62,8 +62,8 @@
             <% end %>
             <% @post.votes_for.up.by_type(User).voters.each do |z| %>
                 <% if z == @user %>
-                    <%= link_to dislike_link_path(@post), method: :put, :class => 'button icon fa-thumbs-o-down' do %>
-                        Dislike
+                    <%= link_to dislike_link_path(@post), method: :put, :class => 'button icon fa-ban' do %>
+                        Unlike
                     <% end %>
                 <% end %>
             <% end %>
